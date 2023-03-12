@@ -17,7 +17,7 @@ elif opcao == 2:
     print("O código do alunoe é ", codigo_aluno)
 elif opcao == 3:
     nome_aluno = input("Digite o novo nome do aluno: ")
-    codigo_aluno = input("Digite o novo código do aluno: ")
+    codigo_aluno = input("Digite o novo código do aluno: teste")
 elif opcao == 4:
     nome_aluno = " "
     codigo_aluno = 0
