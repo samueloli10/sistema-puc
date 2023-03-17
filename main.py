@@ -9,7 +9,6 @@ while opcao != 0:
     print("3 - ALTERAR")
     print("4 - EXCLUIR")
     print("0 - SAIR")
-
     while True:
         try:
             opcao = int(input("Digite a opção: "))
@@ -19,8 +18,8 @@ while opcao != 0:
                 print("\n")
                 break
             elif opcao == 2:
-                print("\nO nome do aluno é ", nome_aluno)
-                print("O código do aluno é ", codigo_aluno, "\n")
+                print(f'\nNome do aluno: {nome_aluno}')
+                print(f'Código do aluno: {codigo_aluno}\n')
                 break
             elif opcao == 3:
                 nome_aluno = input("\nDigite o novo nome do aluno: ")
@@ -28,15 +27,13 @@ while opcao != 0:
                 print("\n")
                 break
             elif opcao == 4:
-                print("\n")
                 nome_aluno = " "
                 codigo_aluno = 0
-                print("\n")
                 break
             elif opcao == 0:
                 print("\n*** Você escolheu sair. ***\n")
                 break
             else :
-                print("\n*** Digite uma opção válida! ***")
+                print("\n*** Digite uma opção válida! ***\n")
         except ValueError: 
             print("\n*** Digitou um valor inválido. ***\n")
