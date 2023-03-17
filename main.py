@@ -16,25 +16,27 @@ while opcao != 0:
             if opcao == 1:
                 nome_aluno = input("\n\nDigite o nome do aluno: ")
                 codigo_aluno = input("Digite o código do aluno: ")
-                print("\n\n")
+                print("\n")
+                break
             elif opcao == 2:
-                print("\n\nO nome do aluno é ", nome_aluno)
-                print("O código do aluno é ", codigo_aluno, "\n\n")
+                print("\nO nome do aluno é ", nome_aluno)
+                print("O código do aluno é ", codigo_aluno, "\n")
+                break
             elif opcao == 3:
-                nome_aluno = input("\n\nDigite o novo nome do aluno: ")
+                nome_aluno = input("\nDigite o novo nome do aluno: ")
                 codigo_aluno = input("Digite o novo código do aluno:")
-                print("\n\n")
+                print("\n")
+                break
             elif opcao == 4:
-                print("\n\n")
+                print("\n")
                 nome_aluno = " "
                 codigo_aluno = 0
-                print("\n\n")
+                print("\n")
+                break
             elif opcao == 0:
-                print("\n\nVocê escolheu sair.\n\n")
+                print("\n*** Você escolheu sair. ***\n")
                 break
             else :
-                print("\n\nDigite uma opção válida.")
-                break
-            break
+                print("\n*** Digite uma opção válida! ***")
         except ValueError: 
-            print("\n\nDigitou um valor inválido.\n\n")
+            print("\n*** Digitou um valor inválido. ***\n")
