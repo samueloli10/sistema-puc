@@ -1,42 +1,40 @@
-nome_aluno = " "
-codigo_aluno = 0
-opcao = 1
+opcao_principal = ' '
+lista_opcoes = ['Estudantes', 'Professores', 'Disciplinas', 'Turmas', 'Matrículas', 'Sair' ]
+lista_nome_estudantes = []
 
-while opcao != 0:
-    print("\n\n-----MENU-----")
-    print("1 - INCLUIR")
-    print("2 - LISTAR")
-    print("3 - ALTERAR")
-    print("4 - EXCLUIR")
-    print("0 - SAIR")
-
-    while True:
-        try:
-            opcao = int(input("Digite a opção: "))
-            if opcao == 1:
-                nome_aluno = input("\n\nDigite o nome do aluno: ")
-                codigo_aluno = input("Digite o código do aluno: ")
-                print("\n")
-                break
-            elif opcao == 2:
-                print("\nO nome do aluno é ", nome_aluno)
-                print("O código do aluno é ", codigo_aluno, "\n")
-                break
-            elif opcao == 3:
-                nome_aluno = input("\nDigite o novo nome do aluno: ")
-                codigo_aluno = input("Digite o novo código do aluno:")
-                print("\n")
-                break
-            elif opcao == 4:
-                print("\n")
-                nome_aluno = " "
-                codigo_aluno = 0
-                print("\n")
-                break
-            elif opcao == 0:
-                print("\n*** Você escolheu sair. ***\n")
-                break
-            else :
-                print("\n*** Digite uma opção válida! ***")
-        except ValueError: 
-            print("\n*** Digitou um valor inválido. ***\n")
+while opcao_principal != 6:
+    print("---- MENU PRINCIPAL ----")
+    print("(1) - Gerenciar estudantes.\n(2) - Gerenciar professores.\n(3) - Gerenciar disciplinas.\n(4) - Gerenciar turmas.\n(5) - Gerenciar matrículas.\n(6) - Sair")
+    try:
+        opcao_principal = int(input("Digite o número da opção: "))
+    except ValueError:
+        print("\n***** VALOR INVÁLIDO. *****\n")
+    except:
+        print("\n***** OCORREU UM ERRO. *****\n")
+    opcao_operacoes = ' '
+    if opcao_principal == 1:
+        while opcao_operacoes != 5:
+            print(f'\n***** [{lista_opcoes[opcao_principal - 1]}] MENU DE OPERAÇÕES *****')
+            print("(1) Incluir.\n(2) Listar.\n(3) Atualizar.\n(4) Excluir.\n(5) Voltar ao menu principal.\n")
+            opcao_operacoes = int(input("Digite o número da opção: "))
+            if opcao_principal == 1 and opcao_operacoes == 1:
+                lista_nome_estudantes.append(input("Nome do estudante: "))
+            elif opcao_principal == 1 and opcao_operacoes == 2:
+                if len(lista_nome_estudantes) != 0:
+                    print("\n--- LISTA DE ESTUDANTES: ---")
+                    for nome in lista_nome_estudantes:
+                        print(nome)
+                else:
+                    print("\n***** NÃO HÁ ESTUDANTES CADASTRADOS. *****\n")
+            elif opcao_operacoes == 5:
+                print("\n ***** VOLTANDO... *****\n")
+                opcao_principal = 0
+            else:
+                print("\n***** EM DESENVOLVIMENTO. *****\n")
+    elif opcao_principal == 6:
+        print("\n***** SAINDO... *****\n")
+        break
+    elif opcao_principal == 2 or opcao_principal == 3 or opcao_principal == 4 or opcao_principal == 5:
+        print("\n***** EM DESENVOLVIMENTO. *****\n")
+    else:
+        print("\n***** DIGITE UMA OPÇÃO VÁLIDA. *****\n")
