@@ -1,3 +1,6 @@
+# NOME: SAMUEL DE OLIVEIRA RÊGO
+# CURSO: ANÁLISE E DESENVOLVIMENTO DE SISTEMAS
+
 """
 def menu_principal():
 
