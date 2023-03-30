@@ -10,7 +10,7 @@ def menu_principal():
             if 1 <= opcao <= 6:
                 return opcao
             else:
-                print("\n***** priDIGITE UMA OPÇÃO VÁLIDA. *****\n")
+                print("\n***** DIGITE UMA OPÇÃO VÁLIDA. *****\n")
                 input("\nPressione ENTER para continuar...")
         except ValueError:
             print("\n***** VALOR INVÁLIDO. *****\n")
@@ -40,6 +40,7 @@ def menu_operacoes(opcao_principal):
 
 def inicio(): 
     lista_estudantes = []
+
     opcao_principal = ' '
     while opcao_principal != 6:
         opcao_principal = menu_principal()
@@ -47,10 +48,26 @@ def inicio():
             opcao_operacao = ' '
             while opcao_operacao != 5:
                 opcao_operacao = menu_operacoes(opcao_principal)
-                if opcao_operacao == 1:
-                    lista_estudantes = create_estudante(lista_estudantes)  
+                if opcao_operacao == 1:          
+                    try: 
+                        print(f"\n===== [ESTUDANTE] INCLUSÃO =====")  
+                        codigo = int(input("Digite o código: "))
+                        nome = input("Digite o nome: ")
+                        cpf = input("Digite o CPF: ")
+                        if verificar_dados(lista_estudantes, cpf) or verificar_dados(lista_estudantes, codigo):
+                            continue
+                        else:
+                            dicionario = {'Código': codigo, 'Nome': nome, 'CPF': cpf}
+                            lista_estudantes = create(lista_estudantes, dicionario)  
+                    except ValueError:
+                        print("\n***** VALOR INVÁLIDO. *****\n")
+                        input("\nPressione ENTER para continuar...")
+                    except:
+                        print("\n***** OCORREU UM ERRO. *****\n")
+                        input("\nPressione ENTER para continuar...")
                 elif opcao_operacao == 2:
-                    read_estudante(lista_estudantes)
+                    print("\n===== [ESTUDANTE] LISTAGEM =====\n")
+                    read(lista_estudantes)
                 elif opcao_operacao == 5:       
                     print("\n ***** VOLTANDO... *****\n")
                     break
@@ -64,28 +81,23 @@ def inicio():
             print("\n***** EM DESENVOLVIMENTO. *****\n")
             input("\nPressione ENTER para continuar...")
 
-def create_estudante(lista_estudantes):
-    print("\n===== [ESTUDANTE] INCLUSÃO =====")
-    while True:
-        try:
-            codigo = int(input("Digite o código: "))
-            nome = input("Digite o nome: ")
-            cpf = input("Digite o CPF: ")
-            dicionario_estudante = {'Código': codigo, 'Nome': nome, 'CPF': cpf}
-            lista_estudantes.append(dicionario_estudante)
-            return lista_estudantes
-        except ValueError:
-            print("\n***** VALOR INVÁLIDO. *****\n")
-            input("\nPressione ENTER para continuar...")
-        except:
-            print("\n***** OCORREU UM ERRO. *****\n")
-            input("\nPressione ENTER para continuar...")
+def verificar_dados(lista, valor_procurado):
+    for dicionario in lista:
+        for chave, valor in dicionario.items():
+            if valor_procurado == valor:
+                print(f"\n===== [ERRO] ATENÇÃO =====")  
+                print(f'O {chave}: {valor} está presente no cadastro:\n{dicionario}\n\nOperação cancelada...') 
+                return True
+    return False
 
-def read_estudante(lista_estudantes):
-    if len(lista_estudantes) != 0:
-        print("\n===== [ESTUDANTE] LISTAGEM =====\n")
-        for dicionario_estudante in lista_estudantes:
-            for chave, valor in dicionario_estudante.items():
+def create(lista, dicionario):
+    lista.append(dicionario)
+    return lista
+        
+def read(lista):
+    if len(lista) != 0:
+        for dicionario in lista:
+            for chave, valor in dicionario.items():
                 print(f'{chave}: {valor}')    
             print("\n==================\n")             
         input("\nPressione ENTER para continuar...")    
@@ -93,6 +105,4 @@ def read_estudante(lista_estudantes):
         print("\n***** NÃO HÁ ESTUDANTES CADASTRADOS. *****\n")
         input("\nPressione ENTER para continuar...")
         
-    
-
 inicio() #inicio do sistema
