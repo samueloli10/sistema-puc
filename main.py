@@ -53,12 +53,17 @@ def inicio():
                         print(f"\n===== [ESTUDANTE] INCLUSÃO =====")  
                         codigo = int(input("Digite o código: "))
                         nome = input("Digite o nome: ")
-                        cpf = input("Digite o CPF: ")
-                        if verificar_dados(lista_estudantes, cpf) or verificar_dados(lista_estudantes, codigo):
-                            continue
+                        cpf = input("Digite o CPF: ")                  
+                        if verificar_dados(lista_estudantes, codigo) is None:
+                            if verificar_dados(lista_estudantes, cpf) is None:
+                                dicionario = {'Código': codigo, 'Nome': nome, 'CPF': cpf}
+                                create(lista_estudantes, dicionario)
+                            else:
+                                print(f"\n===== ERRO =====")  
+                                print(f'O CPF: {cpf} está presente no cadastro:\n{verificar_dados(lista_estudantes, cpf)}\n\nOperação cancelada...')  
                         else:
-                            dicionario = {'Código': codigo, 'Nome': nome, 'CPF': cpf}
-                            lista_estudantes = create(lista_estudantes, dicionario)  
+                            print(f"\n===== ERRO =====")  
+                            print(f'O código: {codigo} está presente no cadastro:\n{verificar_dados(lista_estudantes, codigo)}\n\nOperação cancelada...')
                     except ValueError:
                         print("\n***** VALOR INVÁLIDO. *****\n")
                         input("\nPressione ENTER para continuar...")
@@ -69,9 +74,19 @@ def inicio():
                     print("\n===== [ESTUDANTE] LISTAGEM =====\n")
                     read(lista_estudantes)
                 elif opcao_operacao == 4:
-                    print("\n===== [ESTUDANTE] EXCLUIR =====\n")
-                    codigo = int(input("Digite o código: "))
-                    lista_estudantes = delete(lista_estudantes, codigo)
+                    try: 
+                        print("\n===== [ESTUDANTE] EXCLUIR =====\n")
+                        codigo = int(input("Digite o código: "))
+                        if verificar_dados(lista_estudantes, codigo) is None:
+                            print("\nNão existe cadastro com esse valor...")
+                        else:
+                            delete(lista_estudantes, verificar_dados(lista_estudantes, codigo))
+                    except ValueError:
+                        print("\n***** VALOR INVÁLIDO. *****\n")
+                        input("\nPressione ENTER para continuar...")
+                    except:
+                        print("\n***** OCORREU UM ERRO. *****\n")
+                        input("\nPressione ENTER para continuar...")
                 elif opcao_operacao == 5:       
                     print("\n ***** VOLTANDO... *****\n")
                     break
@@ -87,17 +102,14 @@ def inicio():
 
 def verificar_dados(lista, valor_procurado):
     for dicionario in lista:
-        for chave, valor in dicionario.items():
+        for valor in dicionario.values():
             if valor_procurado == valor:
-                print(f"\n===== VERIFICAÇÃO =====")  
-                print(f'O {chave}: {valor} está presente no cadastro:\n{dicionario}\n\nOperação cancelada...') 
-                return True
-    return False
+                return dicionario
+    return None
 
 def create(lista, dicionario):
     lista.append(dicionario)
     print("\nCadastro concluído...")
-    return lista
              
 def read(lista):
     if len(lista) != 0:
@@ -113,12 +125,8 @@ def read(lista):
 def update():
     return
 
-def delete(lista, valor):
-    for dicionario in lista:
-        if valor in dicionario.values():
-            lista.remove(dicionario)
-            print("\nCadastro excluído...")
-            return lista
-    print("\nNão existe cadastro com esse valor...")
-    return lista
+def delete(lista, dicionario):
+    lista.remove(dicionario)
+    print("\nCadastro excluído...")
+
 inicio() #inicio do sistema
