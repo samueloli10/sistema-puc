@@ -68,6 +68,10 @@ def inicio():
                 elif opcao_operacao == 2:
                     print("\n===== [ESTUDANTE] LISTAGEM =====\n")
                     read(lista_estudantes)
+                elif opcao_operacao == 4:
+                    print("\n===== [ESTUDANTE] EXCLUIR =====\n")
+                    codigo = int(input("Digite o código: "))
+                    lista_estudantes = delete(lista_estudantes, codigo)
                 elif opcao_operacao == 5:       
                     print("\n ***** VOLTANDO... *****\n")
                     break
@@ -85,15 +89,16 @@ def verificar_dados(lista, valor_procurado):
     for dicionario in lista:
         for chave, valor in dicionario.items():
             if valor_procurado == valor:
-                print(f"\n===== [ERRO] ATENÇÃO =====")  
+                print(f"\n===== VERIFICAÇÃO =====")  
                 print(f'O {chave}: {valor} está presente no cadastro:\n{dicionario}\n\nOperação cancelada...') 
                 return True
     return False
 
 def create(lista, dicionario):
     lista.append(dicionario)
+    print("\nCadastro concluído...")
     return lista
-        
+             
 def read(lista):
     if len(lista) != 0:
         for dicionario in lista:
@@ -105,4 +110,15 @@ def read(lista):
         print("\n***** NÃO HÁ ESTUDANTES CADASTRADOS. *****\n")
         input("\nPressione ENTER para continuar...")
         
+def update():
+    return
+
+def delete(lista, valor):
+    for dicionario in lista:
+        if valor in dicionario.values():
+            lista.remove(dicionario)
+            print("\nCadastro excluído...")
+            return lista
+    print("\nNão existe cadastro com esse valor...")
+    return lista
 inicio() #inicio do sistema
