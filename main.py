@@ -14,7 +14,7 @@ def menu_principal():
                 input("\nPressione ENTER para continuar...")
         except ValueError:
             print("\n***** VALOR INVÁLIDO. *****\n")
-            input("\nPressione ENTER para continuar...")
+            input("\nPressione ENTER para continuar...");
         except:
             print("\n***** OCORREU UM ERRO. *****\n")
             input("\nPressione ENTER para continuar...")
